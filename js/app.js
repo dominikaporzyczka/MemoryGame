@@ -20,6 +20,7 @@ function prepareBoard() {
 
 function prepareHTML(board, container) {
     const listOfCard = document.createElement('ul');
+    listOfCard.classList.add('deck');
 
     for(let i = 0; i < board.length; i++) {
         const newCard = document.createElement('li');
