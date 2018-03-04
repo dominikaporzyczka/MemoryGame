@@ -1,6 +1,9 @@
 const deck = document.querySelector('#deck');
 const restartBtn = document.querySelector('.restart');
+let boardHTML;
 let board;
+let openCardIndex = -1;
+let allowClick = true;
 
 const basicSet = [
     '<i class="far fa-gem icon"></i>',
@@ -23,32 +26,60 @@ function prepareBoard() {
 function prepareHTML(board, container) {
     const listOfCard = document.createDocumentFragment();
 
-    for(let i = 0; i < board.length; i++) {
+    for (let i = 0; i < board.length; i++) {
         const newCard = document.createElement('li');
         newCard.classList.add('card');
         newCard.innerHTML = board[i];
-    
+
         listOfCard.appendChild(newCard);
     }
 
     container.innerHTML = "";
     container.appendChild(listOfCard);
+
+    boardHTML = document.querySelectorAll('.card');
 }
 
 function reverseCard(index, card) {
     card.classList.add('open');
+    matchingCards(index, card);
 }
 
 function addEventListenerForCards() {
-    const cards = document.querySelectorAll('.card');
-    for(let i = 0; i < cards.length; i++) {
-        cards[i].addEventListener('click', function() {
-            reverseCard(i, cards[i]);
+    for (let i = 0; i < boardHTML.length; i++) {
+        boardHTML[i].addEventListener('click', function () {
+            if (allowClick) {
+                reverseCard(i, boardHTML[i]);
+            }
         });
     }
 }
 
-restartBtn.addEventListener('click', setUpGame);
+function matchingCards(index, card) {
+    if (openCardIndex >= 0 && openCardIndex !== index) {
+
+        if (board[openCardIndex] === board[index]) {
+            boardHTML[openCardIndex].classList.add("match");
+            card.classList.add("match");
+
+            openCardIndex = -1;
+        }
+        else {
+            allowClick = false;
+
+            setTimeout(function () {
+                boardHTML[openCardIndex].classList.remove("open");
+                card.classList.remove("open");
+                openCardIndex = -1;
+
+                allowClick = true;
+            }, 800);
+
+        }
+    } else {
+        openCardIndex = index;
+    }
+}
 
 function setUpGame() {
     board = prepareBoard();
@@ -57,3 +88,4 @@ function setUpGame() {
 }
 
 setUpGame();
+restartBtn.addEventListener('click', setUpGame);

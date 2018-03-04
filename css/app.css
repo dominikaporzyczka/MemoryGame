@@ -72,12 +72,18 @@ h1 {
 
 .card.open {
     transform: rotateY(180deg);
-    background: #30989f;
+    background: #34acda;
     cursor: default;
+    pointer-events: none;
 }
 
 .open .icon {
     visibility: visible;
+}
+
+.card.match {
+    background: #4bc0c8;
+    pointer-events: none;
 }
 
 /*
