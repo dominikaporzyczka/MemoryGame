@@ -119,6 +119,10 @@ h1 {
     list-style-type: none;
 }
 
+.stars .disable {
+    color: #d2cece;
+}
+
 .restart {
     flex-grow: 1;
     text-align: right;

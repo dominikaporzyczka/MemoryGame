@@ -1,6 +1,7 @@
 const deck = document.querySelector('#deck');
 const restartBtn = document.querySelector('.restart');
 const moves = document.querySelector('#moves');
+const stars = document.querySelectorAll('.stars li');
 let boardHTML;
 let board;
 let openCardIndex = -1;
@@ -93,6 +94,21 @@ function updateMoveCounter(reset = false) {
     }
 
     moves.textContent = moveCounter;
+    disableStars();
+}
+
+function disableStars() {
+    if (moveCounter === 16) {
+        stars[2].classList.add('disable');
+    } else if (moveCounter === 25) {
+        stars[1].classList.add('disable');
+    }
+}
+
+function enableStars() {
+    for(let i = 0; i < stars.length; i++) {
+        stars[i].classList.remove('disable');
+    }
 }
 
 function setUpGame() {
@@ -100,6 +116,7 @@ function setUpGame() {
     prepareHTML(board, deck);
     addEventListenerForCards();
     updateMoveCounter(true);
+    enableStars();
 }
 
 setUpGame();
