@@ -1,0 +1,9 @@
+@media screen and (max-width: 500px) {
+    .deck {
+        padding: 1em;
+    }
+
+    .deck li {
+        font-size: 20px;
+    }
+}

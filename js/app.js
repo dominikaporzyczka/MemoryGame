@@ -31,3 +31,5 @@ function prepareHTML(board, container) {
 
     container.appendChild(listOfCard);
 }
+
+prepareHTML(prepareBoard(), container);

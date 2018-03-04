@@ -2,7 +2,7 @@ html {
     box-sizing: border-box;
 }
 
-*
+*,
 *::before,
 *::after {
     box-sizing: inherit;
@@ -14,4 +14,45 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/*
+* BOARD
+*/
+
+.deck {
+    display: flex;
+    padding: 2em;
+    margin: 0 1em 3em 1em;
+
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    background: linear-gradient(160deg, #feac5e, #c779d0, #4bc0c8);
+    list-style-type: none;
+    border-radius: 10px;
+}
+
+.deck li {
+    display: flex;
+    flex: 0 0 22%;
+    padding: 8% 0;
+    margin: 2% 0;
+    font-size: 33px;
+
+    justify-content: center;
+    align-items: center;
+    background: #447ca9;
+    color: #fff;   
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    border-radius: 8px;
+    cursor: pointer;   
 }
