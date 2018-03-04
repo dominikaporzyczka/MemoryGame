@@ -1,9 +1,11 @@
 const deck = document.querySelector('#deck');
 const restartBtn = document.querySelector('.restart');
+const moves = document.querySelector('#moves');
 let boardHTML;
 let board;
 let openCardIndex = -1;
 let allowClick = true;
+let moveCounter = 0;
 
 const basicSet = [
     '<i class="far fa-gem icon"></i>',
@@ -63,8 +65,9 @@ function matchingCards(index, card) {
             card.classList.add("match");
 
             openCardIndex = -1;
-        }
-        else {
+
+            updateMoveCounter();
+        } else {
             allowClick = false;
 
             setTimeout(function () {
@@ -75,16 +78,28 @@ function matchingCards(index, card) {
                 allowClick = true;
             }, 800);
 
+            updateMoveCounter();
         }
     } else {
         openCardIndex = index;
     }
 }
 
+function updateMoveCounter(reset = false) {
+    if (reset) {
+        moveCounter = 0;
+    } else {
+        moveCounter += 1;
+    }
+
+    moves.textContent = moveCounter;
+}
+
 function setUpGame() {
     board = prepareBoard();
     prepareHTML(board, deck);
     addEventListenerForCards();
+    updateMoveCounter(true);
 }
 
 setUpGame();
