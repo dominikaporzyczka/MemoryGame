@@ -1,4 +1,5 @@
 const container = document.querySelector('#container');
+const deck = document.querySelector('#deck');
 let board;
 
 const basicSet = [
@@ -20,8 +21,7 @@ function prepareBoard() {
 }
 
 function prepareHTML(board, container) {
-    const listOfCard = document.createElement('ul');
-    listOfCard.classList.add('deck');
+    const listOfCard = document.createDocumentFragment();
 
     for(let i = 0; i < board.length; i++) {
         const newCard = document.createElement('li');
@@ -31,7 +31,8 @@ function prepareHTML(board, container) {
         listOfCard.appendChild(newCard);
     }
 
-    container.appendChild(listOfCard);
+    deck.innerHTML = "";
+    deck.appendChild(listOfCard);
 }
 
 function reverseCard(index, card) {
