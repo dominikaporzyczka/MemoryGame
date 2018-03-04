@@ -1,4 +1,5 @@
 const deck = document.querySelector('#deck');
+const restartBtn = document.querySelector('.restart');
 let board;
 
 const basicSet = [
@@ -46,6 +47,8 @@ function addEventListenerForCards() {
         });
     }
 }
+
+restartBtn.addEventListener('click', setUpGame);
 
 function setUpGame() {
     board = prepareBoard();
