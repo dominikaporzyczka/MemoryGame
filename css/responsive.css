@@ -1,9 +1,16 @@
 @media screen and (max-width: 500px) {
-    .deck {
+    #deck {
         padding: 1em;
     }
 
-    .deck li {
+    .card {
         font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .score-panel,
+    .restart {
+        text-align: center;
     }
 }

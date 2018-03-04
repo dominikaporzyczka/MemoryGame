@@ -27,6 +27,11 @@ h1 {
     flex-direction: column;
 }
 
+.inner {
+    margin: 0 1em;
+    text-align: center;
+}
+
 /*
 * BOARD
 */
@@ -34,7 +39,6 @@ h1 {
 #deck {
     display: flex;
     padding: 2em;
-    margin: 0 1em 3em 1em;
 
     flex-wrap: wrap;
     align-items: center;
@@ -82,15 +86,26 @@ h1 {
 
 .game-panel {
     display: flex;
-    max-width: 500px;
+    flex-wrap: wrap;
+    margin: 0 2em;
     font-family: 'Indie Flower', cursive;
     font-weight: bold;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+}
+
+.score-panel {
+    flex-grow: 2;
+    text-align: left;
+}
+
+.score-panel p {
+    display: inline-block;
+    margin: 0;
 }
 
 .stars {
     display: inline-block;
-    margin: 0;
+    margin: 0 0.5em 0 0;
     padding: 0;
 }
 
@@ -100,5 +115,7 @@ h1 {
 }
 
 .restart {
+    flex-grow: 1;
+    text-align: right;
     cursor: pointer;
 }

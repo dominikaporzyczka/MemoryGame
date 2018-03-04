@@ -1,4 +1,3 @@
-const container = document.querySelector('#container');
 const deck = document.querySelector('#deck');
 let board;
 
@@ -31,8 +30,8 @@ function prepareHTML(board, container) {
         listOfCard.appendChild(newCard);
     }
 
-    deck.innerHTML = "";
-    deck.appendChild(listOfCard);
+    container.innerHTML = "";
+    container.appendChild(listOfCard);
 }
 
 function reverseCard(index, card) {
@@ -50,7 +49,7 @@ function addEventListenerForCards() {
 
 function setUpGame() {
     board = prepareBoard();
-    prepareHTML(board, container);
+    prepareHTML(board, deck);
     addEventListenerForCards();
 }
 
