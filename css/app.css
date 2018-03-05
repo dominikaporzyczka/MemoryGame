@@ -38,7 +38,6 @@ h1 {
 #deck {
     display: flex;
     padding: 2em;
-
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
@@ -54,7 +53,6 @@ h1 {
     padding: 8% 0;
     margin: 2% 0;
     font-size: 33px;
-
     transform: rotateY(-180deg);
     justify-content: center;
     align-items: center;

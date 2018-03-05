@@ -74,17 +74,12 @@ function matchingCards(index, card) {
     if (openCardIndex >= 0 && openCardIndex !== index) {
 
         if (board[openCardIndex] === board[index]) {
-            const matchAnimate = 'rubberBand';
-            boardHTML[openCardIndex].classList.add('match', 'animated', matchAnimate);
-            card.classList.add('match', 'animated', matchAnimate);
-
-            openCardIndex = -1;
-
+            animateCorrectCards(card);
             updateMoveCounter();
             countTheNumberOfCardPairs();
         } else {
             allowClick = false;
-            makeAnimateCard(card);
+            animateWrongCards(card);
             updateMoveCounter();
         }
     } else {
@@ -92,7 +87,16 @@ function matchingCards(index, card) {
     }
 }
 
-function makeAnimateCard(card) {
+function animateCorrectCards(card) {
+    const matchAnimate = 'rubberBand';
+    setTimeout(function () {
+        boardHTML[openCardIndex].classList.add('match', 'animated', matchAnimate);
+        card.classList.add('match', 'animated', matchAnimate);
+        openCardIndex = -1;
+    }, 300);
+}
+
+function animateWrongCards(card) {
     const wrongAnimate = 'jello';
     setTimeout(function () {
         boardHTML[openCardIndex].classList.add('animated', wrongAnimate, 'wrong-match');
@@ -132,7 +136,7 @@ function disableStars() {
 }
 
 function enableStars() {
-    for(let i = 0; i < stars.length; i++) {
+    for (let i = 0; i < stars.length; i++) {
         stars[i].classList.remove('disable');
     }
 
@@ -143,8 +147,8 @@ function countTheNumberOfCardPairs(reset = false) {
     if (reset) {
         pairsCounter = 0;
     } else {
-        pairsCounter +=1;
-        
+        pairsCounter += 1;
+
         if (pairsCounter === 8) {
             endTime = new Date();
             showTheWinningMessage();
@@ -153,7 +157,7 @@ function countTheNumberOfCardPairs(reset = false) {
 }
 
 function showTheWinningMessage() {
-    setTimeout(function() {
+    setTimeout(function () {
         winningMessage.classList.add('enable');
         gameBoard.classList.add('disable');
 
@@ -179,7 +183,7 @@ function setUpGame() {
     hideTheWinningMessage();
 }
 
-for(let i = 0; i < restartBtn.length; i++) {
+for (let i = 0; i < restartBtn.length; i++) {
     restartBtn[i].addEventListener('click', setUpGame);
 }
 
