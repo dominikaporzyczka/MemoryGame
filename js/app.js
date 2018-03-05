@@ -62,6 +62,10 @@ function addEventListenerForCards() {
             if (allowClick) {
                 reverseCard(i, boardHTML[i]);
             }
+
+            if (!startTime) {
+                startTime = new Date();
+            }
         });
     }
 }
@@ -70,8 +74,9 @@ function matchingCards(index, card) {
     if (openCardIndex >= 0 && openCardIndex !== index) {
 
         if (board[openCardIndex] === board[index]) {
-            boardHTML[openCardIndex].classList.add("match");
-            card.classList.add("match");
+            const matchAnimate = 'rubberBand';
+            boardHTML[openCardIndex].classList.add('match', 'animated', matchAnimate);
+            card.classList.add('match', 'animated', matchAnimate);
 
             openCardIndex = -1;
 
@@ -79,20 +84,30 @@ function matchingCards(index, card) {
             countTheNumberOfCardPairs();
         } else {
             allowClick = false;
-
-            setTimeout(function () {
-                boardHTML[openCardIndex].classList.remove("open");
-                card.classList.remove("open");
-                openCardIndex = -1;
-
-                allowClick = true;
-            }, 800);
-
+            makeAnimateCard(card);
             updateMoveCounter();
         }
     } else {
         openCardIndex = index;
     }
+}
+
+function makeAnimateCard(card) {
+    const wrongAnimate = 'jello';
+    setTimeout(function () {
+        boardHTML[openCardIndex].classList.add('animated', wrongAnimate, 'wrong-match');
+        card.classList.add('animated', wrongAnimate, 'wrong-match');
+    }, 300);
+    setTimeout(function () {
+        boardHTML[openCardIndex].classList.remove('animated', wrongAnimate);
+        card.classList.remove('animated', wrongAnimate);
+    }, 700);
+    setTimeout(function () {
+        boardHTML[openCardIndex].classList.remove('open', 'wrong-match');
+        card.classList.remove('open', 'wrong-match');
+        openCardIndex = -1;
+        allowClick = true;
+    }, 900);
 }
 
 function updateMoveCounter(reset = false) {
@@ -155,13 +170,13 @@ function hideTheWinningMessage() {
 
 function setUpGame() {
     board = prepareBoard();
+    startTime = null;
     prepareHTML(board, deck);
     addEventListenerForCards();
     updateMoveCounter(true);
     enableStars();
     countTheNumberOfCardPairs(true);
     hideTheWinningMessage();
-    startTime = new Date();
 }
 
 for(let i = 0; i < restartBtn.length; i++) {

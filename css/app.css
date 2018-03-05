@@ -55,6 +55,7 @@ h1 {
     margin: 2% 0;
     font-size: 33px;
 
+    transform: rotateY(-180deg);
     justify-content: center;
     align-items: center;
     background: #447ca9;
@@ -70,7 +71,7 @@ h1 {
 }
 
 .card.open {
-    transform: rotateY(180deg);
+    transform: rotateY(0deg);
     background: #34acda;
     cursor: default;
     pointer-events: none;
@@ -83,6 +84,10 @@ h1 {
 .card.match {
     background: #4bc0c8;
     pointer-events: none;
+}
+
+.card.wrong-match {
+    background: #b51f1f;
 }
 
 /*
