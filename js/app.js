@@ -7,6 +7,7 @@ let board;
 let openCardIndex = -1;
 let allowClick = true;
 let moveCounter = 0;
+let pairsCounter = 0;
 
 const basicSet = [
     '<i class="far fa-gem icon"></i>',
@@ -68,6 +69,7 @@ function matchingCards(index, card) {
             openCardIndex = -1;
 
             updateMoveCounter();
+            countTheNumberOfCardPairs();
         } else {
             allowClick = false;
 
@@ -111,12 +113,26 @@ function enableStars() {
     }
 }
 
+function countTheNumberOfCardPairs(reset = false) {
+    if (reset) {
+        pairsCounter = 0;
+    } else {
+        pairsCounter +=1;
+        console.log(pairsCounter);
+        
+        if (pairsCounter === 8) {
+            console.log("you win!!!!!!!");
+        }
+    }
+}
+
 function setUpGame() {
     board = prepareBoard();
     prepareHTML(board, deck);
     addEventListenerForCards();
     updateMoveCounter(true);
     enableStars();
+    countTheNumberOfCardPairs(true);
 }
 
 setUpGame();
