@@ -127,7 +127,6 @@ function countTheNumberOfCardPairs(reset = false) {
         pairsCounter = 0;
     } else {
         pairsCounter +=1;
-        console.log(pairsCounter);
         
         if (pairsCounter === 8) {
             showTheWinningMessage();
