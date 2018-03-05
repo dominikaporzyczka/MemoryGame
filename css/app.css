@@ -137,10 +137,40 @@ h1 {
     display: none;
 }
 
-#winning-message {
-    display: none;
-}
-
 #winning-message.enable {
     display: block;
+}
+
+#winning-message {
+    display: none;
+    margin: 80px 10px;
+    text-align: center;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.5em;
+}
+
+.icon_winning-message {
+    font-size: 3em;
+    color: #39d44d;
+}
+
+.btn {
+    padding: 15px 20px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background: linear-gradient(160deg, #feac5e, #c779d0, #4bc0c8);
+    border: 3px solid #fff;
+}
+
+.btn:hover {
+    background: transparent;
+    border: 3px solid transparent;
+    border-image: linear-gradient(160deg, #feac5e, #c779d0, #4bc0c8);
+    border-image-slice: 1;
+    color: #000;
 }
