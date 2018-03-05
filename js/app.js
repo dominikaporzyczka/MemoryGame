@@ -1,7 +1,9 @@
 const deck = document.querySelector('#deck');
-const restartBtn = document.querySelector('.restart');
+const restartBtn = document.querySelectorAll('.restart');
 const moves = document.querySelector('#moves');
 const stars = document.querySelectorAll('.stars li');
+const game = document.querySelector('#container');
+const winningMessage = document.querySelector('#winning-message');
 let boardHTML;
 let board;
 let openCardIndex = -1;
@@ -121,9 +123,21 @@ function countTheNumberOfCardPairs(reset = false) {
         console.log(pairsCounter);
         
         if (pairsCounter === 8) {
-            console.log("you win!!!!!!!");
+            showTheWinningMessage();
         }
     }
+}
+
+function showTheWinningMessage() {
+    setTimeout(function() {
+        winningMessage.classList.add('enable');
+        game.classList.add('disable');
+    }, 800);
+}
+
+function hideTheWinningMessage() {
+    winningMessage.classList.remove('enable');
+    game.classList.remove('disable');
 }
 
 function setUpGame() {
@@ -133,7 +147,11 @@ function setUpGame() {
     updateMoveCounter(true);
     enableStars();
     countTheNumberOfCardPairs(true);
+    hideTheWinningMessage();
+}
+
+for(let i = 0; i < restartBtn.length; i++) {
+    restartBtn[i].addEventListener('click', setUpGame);
 }
 
 setUpGame();
-restartBtn.addEventListener('click', setUpGame);

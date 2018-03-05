@@ -27,7 +27,7 @@ h1 {
     flex-direction: column;
 }
 
-.inner {
+.container_inner {
     margin: 0 1em;
     text-align: center;
 }
@@ -127,4 +127,20 @@ h1 {
     flex-grow: 1;
     text-align: right;
     cursor: pointer;
+}
+
+/*
+* WINNING MESSAGE
+*/
+
+#container.disable {
+    display: none;
+}
+
+#winning-message {
+    display: none;
+}
+
+#winning-message.enable {
+    display: block;
 }
