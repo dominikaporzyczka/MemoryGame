@@ -12,3 +12,14 @@ function shuffle(array) {
 
     return array;
 }
+
+function calcTime(startTime, endTime) {
+    let timeDiff = endTime - startTime; //in ms
+    // strip the ms
+    timeDiff /= 1000;
+
+  // get seconds 
+    let seconds = Math.round(timeDiff);
+    
+    return seconds;
+}

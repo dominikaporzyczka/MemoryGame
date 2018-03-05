@@ -6,6 +6,7 @@ const gameBoard = document.querySelector('#container');
 const winningMessage = document.querySelector('#winning-message');
 const movesFinalResult = document.querySelector('.moves-final-result');
 const numberOfStars = document.querySelector('.number-of-stars');
+const timeOfTheGame = document.querySelector('.time-of-the-game');
 let boardHTML;
 let board;
 let openCardIndex = -1;
@@ -13,6 +14,7 @@ let allowClick = true;
 let moveCounter = 0;
 let pairsCounter = 0;
 let starsCounter = 3;
+let startTime, endTime;
 
 const basicSet = [
     '<i class="far fa-gem icon"></i>',
@@ -129,6 +131,7 @@ function countTheNumberOfCardPairs(reset = false) {
         pairsCounter +=1;
         
         if (pairsCounter === 8) {
+            endTime = new Date();
             showTheWinningMessage();
         }
     }
@@ -141,6 +144,7 @@ function showTheWinningMessage() {
 
         movesFinalResult.textContent = moveCounter;
         numberOfStars.textContent = starsCounter;
+        timeOfTheGame.textContent = calcTime(startTime, endTime);
     }, 400);
 }
 
@@ -157,6 +161,7 @@ function setUpGame() {
     enableStars();
     countTheNumberOfCardPairs(true);
     hideTheWinningMessage();
+    startTime = new Date();
 }
 
 for(let i = 0; i < restartBtn.length; i++) {
