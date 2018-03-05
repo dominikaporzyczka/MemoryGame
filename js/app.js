@@ -141,7 +141,7 @@ function showTheWinningMessage() {
 
         movesFinalResult.textContent = moveCounter;
         numberOfStars.textContent = starsCounter;
-    }, 800);
+    }, 400);
 }
 
 function hideTheWinningMessage() {
