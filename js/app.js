@@ -2,14 +2,17 @@ const deck = document.querySelector('#deck');
 const restartBtn = document.querySelectorAll('.restart');
 const moves = document.querySelector('#moves');
 const stars = document.querySelectorAll('.stars li');
-const game = document.querySelector('#container');
+const gameBoard = document.querySelector('#container');
 const winningMessage = document.querySelector('#winning-message');
+const movesFinalResult = document.querySelector('.moves-final-result');
+const numberOfStars = document.querySelector('.number-of-stars');
 let boardHTML;
 let board;
 let openCardIndex = -1;
 let allowClick = true;
 let moveCounter = 0;
 let pairsCounter = 0;
+let starsCounter = 3;
 
 const basicSet = [
     '<i class="far fa-gem icon"></i>',
@@ -104,8 +107,10 @@ function updateMoveCounter(reset = false) {
 function disableStars() {
     if (moveCounter === 16) {
         stars[2].classList.add('disable');
+        starsCounter -= 1;
     } else if (moveCounter === 25) {
         stars[1].classList.add('disable');
+        starsCounter -= 1;
     }
 }
 
@@ -113,6 +118,8 @@ function enableStars() {
     for(let i = 0; i < stars.length; i++) {
         stars[i].classList.remove('disable');
     }
+
+    starsCounter = 3;
 }
 
 function countTheNumberOfCardPairs(reset = false) {
@@ -131,13 +138,16 @@ function countTheNumberOfCardPairs(reset = false) {
 function showTheWinningMessage() {
     setTimeout(function() {
         winningMessage.classList.add('enable');
-        game.classList.add('disable');
+        gameBoard.classList.add('disable');
+
+        movesFinalResult.textContent = moveCounter;
+        numberOfStars.textContent = starsCounter;
     }, 800);
 }
 
 function hideTheWinningMessage() {
     winningMessage.classList.remove('enable');
-    game.classList.remove('disable');
+    gameBoard.classList.remove('disable');
 }
 
 function setUpGame() {
