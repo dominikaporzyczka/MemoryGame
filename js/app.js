@@ -230,16 +230,22 @@ function hideTheWinningMessage() {
 }
 
 /**
+ * @description Sets all basic variables to starting values
+ */
+function resetBasicVariables() {
+    openCardIndex = -1;
+    timeCounter = 0;
+    clearInterval(timeInterval);
+    timeInterval = null;
+    displayedTime.textContent = 0;
+}
+
+/**
  * @description Sets up game
  */
 function setUpGame() {
     board = prepareBoard();
-    // reset basic variables
-    openCardIndex = -1;
-    timeCounter = 0;
-    timeInterval = null;
-    displayedTime.textContent = 0;
-
+    resetBasicVariables();
     prepareHTML(board, deck);
     addEventListenerForCards();
     updateMoveCounter(true);
