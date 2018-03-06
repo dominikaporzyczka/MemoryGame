@@ -1,4 +1,9 @@
 // Shuffle function from http://stackoverflow.com/a/2450976
+
+/**
+ * @description Shuffles elements in array
+ * @param  {array} array
+ */
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -13,13 +18,19 @@ function shuffle(array) {
     return array;
 }
 
-//based on solution from https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript
+// Based on solution from https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript
+
+/**
+ * @description Calculates time
+ * @param  {object} startTime
+ * @param  {object} endTime
+ */
 function calcTime(startTime, endTime) {
-    let timeDiff = endTime - startTime; //in ms
+    let timeDiff = endTime - startTime; // in ms
     // strip the ms
     timeDiff /= 1000;
 
-  // get seconds 
+    // get seconds 
     let seconds = Math.round(timeDiff);
     
     return seconds;
