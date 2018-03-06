@@ -157,12 +157,13 @@ function animateWrongCards(card) {
         allowClick = true;
     }, 900);
 }
+
 /**
  * @description Updates move counter and call disableStars function
  * @param  {boolean} reset=false (true means start new game)
  */
 function updateMoveCounter(reset = false) {
-    moveCounter = reset ? 0 : moveCounter += 1;
+    moveCounter = reset ? 0 : moveCounter + 1;
     moves.textContent = moveCounter;
     disableStars();
 }
