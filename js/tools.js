@@ -12,15 +12,3 @@ function shuffle(array) {
 
     return array;
 }
-
-//based on solution from https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript
-function calcTime(startTime, endTime) {
-    let timeDiff = endTime - startTime; //in ms
-    // strip the ms
-    timeDiff /= 1000;
-
-  // get seconds 
-    let seconds = Math.round(timeDiff);
-    
-    return seconds;
-}
