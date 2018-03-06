@@ -1,20 +1,27 @@
-const deck = document.querySelector('#deck');
-const restartBtn = document.querySelectorAll('.restart');
-const moves = document.querySelector('#moves');
-const stars = document.querySelectorAll('.stars li');
-const gameBoard = document.querySelector('#container');
-const winningMessage = document.querySelector('#winning-message');
-const movesFinalResult = document.querySelector('.moves-final-result');
-const numberOfStars = document.querySelector('.number-of-stars');
-const timeOfTheGame = document.querySelector('.time-of-the-game');
-const displayedTime = document.querySelector('#displayed-time');
-let boardHTML, board;
-let openCardIndex = -1;
-let allowClick = true;
-let moveCounter = 0;
-let pairsCounter = 0;
-let starsCounter = 3;
-let timeCounter = 0, timeInterval;
+const game = {
+    board: null,
+    openCardIndex: -1,
+    allowClick: true,
+    moveCounter: 0,
+    pairsCounter: 0,
+    starsCounter: 3,
+    timeCounter: 0,
+    timeInterval: null,
+
+    ui: {
+        boardHTML: null,
+        deck: document.querySelector('#deck'),
+        restartBtn: document.querySelectorAll('.restart'),
+        moves: document.querySelector('#moves'),
+        stars: document.querySelectorAll('.stars li'),
+        gameBoard: document.querySelector('#container'),
+        winningMessage: document.querySelector('#winning-message'),
+        movesFinalResult: document.querySelector('.moves-final-result'),
+        numberOfStars: document.querySelector('.number-of-stars'),
+        timeOfTheGame: document.querySelector('.time-of-the-game'),
+        displayedTime: document.querySelector('#displayed-time')
+    }
+}
 
 const basicSet = [
     '<i class="far fa-gem icon"></i>',
@@ -58,7 +65,7 @@ function prepareHTML(board, container) {
     container.innerHTML = "";
     container.appendChild(listOfCard);
     // assigning created elements with 'card' class to variable
-    boardHTML = document.querySelectorAll('.card');
+    game.boardHTML = document.querySelectorAll('.card');
 }
 
 /**
@@ -76,16 +83,16 @@ function reverseCard(index, card) {
  */
 function addEventListenerForCards() {
     // iterating through NodeList of cards
-    for (let i = 0; i < boardHTML.length; i++) {
-        boardHTML[i].addEventListener('click', function () {
-            if (allowClick) {
-                reverseCard(i, boardHTML[i]);
+    for (let i = 0; i < game.boardHTML.length; i++) {
+        game.boardHTML[i].addEventListener('click', function () {
+            if (game.allowClick) {
+                reverseCard(i, game.boardHTML[i]);
             }
 
-            if (!timeInterval) {
-                timeInterval = setInterval(function () {
-                    timeCounter += 1;
-                    displayedTime.textContent = timeCounter;
+            if (!game.timeInterval) {
+                game.timeInterval = setInterval(function () {
+                    game.timeCounter += 1;
+                    game.ui.displayedTime.textContent = game.timeCounter;
                 }, 1000);
             }
         });
@@ -99,19 +106,19 @@ function addEventListenerForCards() {
  */
 function matchingCards(index, card) {
     // the condition is met if the first card is already clicked and it is not the same card
-    if (openCardIndex >= 0 && openCardIndex !== index) {
+    if (game.openCardIndex >= 0 && game.openCardIndex !== index) {
         // if cards match
-        if (board[openCardIndex] === board[index]) {
+        if (game.board[game.openCardIndex] === game.board[index]) {
             animateCorrectCards(card);
             updateMoveCounter();
             countTheNumberOfCardPairs();
         } else {  // if cards do not match
-            allowClick = false;
+            game.allowClick = false;
             animateWrongCards(card);
             updateMoveCounter();
         }
     } else { // assigns the index of the first clicked card
-        openCardIndex = index;
+        game.openCardIndex = index;
     }
 }
 
@@ -123,10 +130,10 @@ function animateCorrectCards(card) {
     const matchAnimate = 'rubberBand';
     // add animation after reverse cards
     setTimeout(function () {
-        boardHTML[openCardIndex].classList.add('match', 'animated', matchAnimate);
+        game.boardHTML[game.openCardIndex].classList.add('match', 'animated', matchAnimate);
         card.classList.add('match', 'animated', matchAnimate);
         // reset index
-        openCardIndex = -1;
+        game.openCardIndex = -1;
     }, 300);
 }
 
@@ -138,23 +145,23 @@ function animateWrongCards(card) {
     const wrongAnimate = 'jello';
     // add animation after reverse cards
     setTimeout(function () {
-        boardHTML[openCardIndex].classList.add('animated', wrongAnimate, 'wrong-match');
+        game.boardHTML[game.openCardIndex].classList.add('animated', wrongAnimate, 'wrong-match');
         card.classList.add('animated', wrongAnimate, 'wrong-match');
     }, 300);
 
     // remove animation
     setTimeout(function () {
-        boardHTML[openCardIndex].classList.remove('animated', wrongAnimate);
+        game.boardHTML[game.openCardIndex].classList.remove('animated', wrongAnimate);
         card.classList.remove('animated', wrongAnimate);
     }, 700);
 
     // reverse cards
     setTimeout(function () {
-        boardHTML[openCardIndex].classList.remove('open', 'wrong-match');
+        game.boardHTML[game.openCardIndex].classList.remove('open', 'wrong-match');
         card.classList.remove('open', 'wrong-match');
         // reset index
-        openCardIndex = -1;
-        allowClick = true;
+        game.openCardIndex = -1;
+        game.allowClick = true;
     }, 900);
 }
 
@@ -163,8 +170,8 @@ function animateWrongCards(card) {
  * @param  {boolean} reset=false (true means start new game)
  */
 function updateMoveCounter(reset = false) {
-    moveCounter = reset ? 0 : moveCounter + 1;
-    moves.textContent = moveCounter;
+    game.moveCounter = reset ? 0 : game.moveCounter + 1;
+    game.ui.moves.textContent = game.moveCounter;
     disableStars();
 }
 
@@ -172,12 +179,12 @@ function updateMoveCounter(reset = false) {
  * @description Disables stars after specific number of moves
  */
 function disableStars() {
-    if (moveCounter === 16) {
-        stars[2].classList.add('disable');
-        starsCounter -= 1;
-    } else if (moveCounter === 25) {
-        stars[1].classList.add('disable');
-        starsCounter -= 1;
+    if (game.moveCounter === 16) {
+        game.ui.stars[2].classList.add('disable');
+        game.starsCounter -= 1;
+    } else if (game.moveCounter === 25) {
+        game.ui.stars[1].classList.add('disable');
+        game.starsCounter -= 1;
     }
 }
 
@@ -185,11 +192,11 @@ function disableStars() {
  * @description Enables all stars
  */
 function enableStars() {
-    for (let i = 0; i < stars.length; i++) {
-        stars[i].classList.remove('disable');
+    for (let i = 0; i < game.ui.stars.length; i++) {
+        game.ui.stars[i].classList.remove('disable');
     }
     // reset stars counter
-    starsCounter = 3;
+    game.starsCounter = 3;
 }
 
 /**
@@ -198,11 +205,11 @@ function enableStars() {
  */
 function countTheNumberOfCardPairs(reset = false) {
     if (reset) {
-        pairsCounter = 0;
+        game.pairsCounter = 0;
     } else {
-        pairsCounter += 1;
-        if (pairsCounter === 8) {
-            clearInterval(timeInterval);
+        game.pairsCounter += 1;
+        if (game.pairsCounter === 8) {
+            clearInterval(game.timeInterval);
             showTheWinningMessage();
         }
     }
@@ -213,12 +220,12 @@ function countTheNumberOfCardPairs(reset = false) {
  */
 function showTheWinningMessage() {
     setTimeout(function () {
-        winningMessage.classList.add('enable');
-        gameBoard.classList.add('disable');
+        game.ui.winningMessage.classList.add('enable');
+        game.ui.gameBoard.classList.add('disable');
 
-        movesFinalResult.textContent = moveCounter;
-        numberOfStars.textContent = starsCounter;
-        timeOfTheGame.textContent = timeCounter;
+        game.ui.movesFinalResult.textContent = game.moveCounter;
+        game.ui.numberOfStars.textContent = game.starsCounter;
+        game.ui.timeOfTheGame.textContent = game.timeCounter;
     }, 400);
 }
 
@@ -226,28 +233,28 @@ function showTheWinningMessage() {
  * @description Hides the winning message and displays the game board
  */
 function hideTheWinningMessage() {
-    winningMessage.classList.remove('enable');
-    gameBoard.classList.remove('disable');
+    game.ui.winningMessage.classList.remove('enable');
+    game.ui.gameBoard.classList.remove('disable');
 }
 
 /**
  * @description Sets all basic variables to starting values
  */
 function resetBasicVariables() {
-    openCardIndex = -1;
-    timeCounter = 0;
-    clearInterval(timeInterval);
-    timeInterval = null;
-    displayedTime.textContent = 0;
+    game.openCardIndex = -1;
+    game.timeCounter = 0;
+    clearInterval(game.timeInterval);
+    game.timeInterval = null;
+    game.ui.displayedTime.textContent = 0;
 }
 
 /**
  * @description Sets up game
  */
 function setUpGame() {
-    board = prepareBoard();
+    game.board = prepareBoard();
     resetBasicVariables();
-    prepareHTML(board, deck);
+    prepareHTML(game.board, game.ui.deck);
     addEventListenerForCards();
     updateMoveCounter(true);
     enableStars();
@@ -256,8 +263,8 @@ function setUpGame() {
 }
 
 // add click event listeners for restart game button
-for (let i = 0; i < restartBtn.length; i++) {
-    restartBtn[i].addEventListener('click', setUpGame);
+for (let i = 0; i < game.ui.restartBtn.length; i++) {
+    game.ui.restartBtn[i].addEventListener('click', setUpGame);
 }
 
 setUpGame();
