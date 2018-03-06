@@ -7,14 +7,25 @@
         font-size: 20px;
     }
 
+    .game-panel_btn {
+        order: -1;
+        flex-basis: 100%;
+        margin-bottom: 20px;
+    }
+
     #winning-message {
         font-size: 1em;
     }
 }
 
 @media screen and (max-width: 280px) {
-    .score-panel,
-    .restart {
+    .score-panel {
         text-align: center;
+    }
+
+    .game-panel_btn,
+    .timer,
+    .score-panel {
+        flex-basis: 100%;
     }
 }
