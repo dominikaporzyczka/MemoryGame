@@ -32,6 +32,29 @@ h1 {
 }
 
 /*
+* BUTTONS
+*/
+.btn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: 3px solid #fff;
+    font-family: 'Indie Flower', cursive;
+}
+
+.btn:hover {
+    background: transparent;
+    border: 3px solid transparent;
+    border-image: linear-gradient(160deg, #feac5e, #c779d0, #4bc0c8);
+    border-image-slice: 1;
+    color: #000;
+}
+
+/*
 * BOARD
 */
 
@@ -95,13 +118,14 @@ h1 {
 .game-panel {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
     margin: 0 2em;
     font-family: 'Indie Flower', cursive;
     font-weight: bold;
 }
 
 .score-panel {
-    flex-grow: 2;
     text-align: left;
 }
 
@@ -125,9 +149,14 @@ h1 {
     color: #d2cece;
 }
 
-.restart {
-    flex-grow: 1;
-    text-align: right;
+.timer {
+    margin: 0;
+}
+
+.btn-restart {
+    padding: 5px 20px;
+    background: #447ca9;
+    text-align: center;
     cursor: pointer;
 }
 
@@ -156,23 +185,7 @@ h1 {
     color: #39d44d;
 }
 
-.btn {
+.btn_winning-message {
     padding: 15px 20px;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    color: #fff;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
     background: linear-gradient(160deg, #feac5e, #c779d0, #4bc0c8);
-    border: 3px solid #fff;
-}
-
-.btn:hover {
-    background: transparent;
-    border: 3px solid transparent;
-    border-image: linear-gradient(160deg, #feac5e, #c779d0, #4bc0c8);
-    border-image-slice: 1;
-    color: #000;
 }
