@@ -7,14 +7,14 @@ const winningMessage = document.querySelector('#winning-message');
 const movesFinalResult = document.querySelector('.moves-final-result');
 const numberOfStars = document.querySelector('.number-of-stars');
 const timeOfTheGame = document.querySelector('.time-of-the-game');
-let boardHTML;
-let board;
+const displayedTime = document.querySelector('#displayed-time');
+let boardHTML, board;
 let openCardIndex = -1;
 let allowClick = true;
 let moveCounter = 0;
 let pairsCounter = 0;
 let starsCounter = 3;
-let startTime, endTime;
+let timeCounter = 0, timeInterval;
 
 const basicSet = [
     '<i class="far fa-gem icon"></i>',
@@ -63,8 +63,11 @@ function addEventListenerForCards() {
                 reverseCard(i, boardHTML[i]);
             }
 
-            if (!startTime) {
-                startTime = new Date();
+            if (!timeInterval) {
+                timeInterval = setInterval(function () {
+                    timeCounter += 1;
+                    displayedTime.textContent = timeCounter;
+                }, 1000);
             }
         });
     }
@@ -150,7 +153,7 @@ function countTheNumberOfCardPairs(reset = false) {
         pairsCounter += 1;
 
         if (pairsCounter === 8) {
-            endTime = new Date();
+            clearInterval(timeInterval);
             showTheWinningMessage();
         }
     }
@@ -163,7 +166,7 @@ function showTheWinningMessage() {
 
         movesFinalResult.textContent = moveCounter;
         numberOfStars.textContent = starsCounter;
-        timeOfTheGame.textContent = calcTime(startTime, endTime);
+        timeOfTheGame.textContent = timeCounter;
     }, 400);
 }
 
@@ -174,9 +177,11 @@ function hideTheWinningMessage() {
 
 function setUpGame() {
     board = prepareBoard();
-    startTime = null;
     //reset index
     openCardIndex = -1;
+    timeCounter = 0;
+    timeInterval = null;
+    displayedTime.textContent = 0;
     prepareHTML(board, deck);
     addEventListenerForCards();
     updateMoveCounter(true);
