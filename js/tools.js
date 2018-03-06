@@ -1,4 +1,9 @@
 // Shuffle function from http://stackoverflow.com/a/2450976
+
+/**
+ * @description Shuffles elements in array
+ * @param  {array} array
+ */
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
