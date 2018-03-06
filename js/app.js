@@ -72,7 +72,7 @@ function reverseCard(index, card) {
 }
 
 /**
- * @description Adds event listeners on click for all cards
+ * @description Adds click event listeners for all cards
  */
 function addEventListenerForCards() {
     // iterating through NodeList of cards
@@ -138,11 +138,13 @@ function animateWrongCards(card) {
         boardHTML[openCardIndex].classList.add('animated', wrongAnimate, 'wrong-match');
         card.classList.add('animated', wrongAnimate, 'wrong-match');
     }, 300);
+
     // remove animation
     setTimeout(function () {
         boardHTML[openCardIndex].classList.remove('animated', wrongAnimate);
         card.classList.remove('animated', wrongAnimate);
     }, 700);
+
     // reverse cards
     setTimeout(function () {
         boardHTML[openCardIndex].classList.remove('open', 'wrong-match');
@@ -241,7 +243,7 @@ function setUpGame() {
     hideTheWinningMessage();
 }
 
-// add event listeners on click for restart game button
+// add click event listeners for restart game button
 for (let i = 0; i < restartBtn.length; i++) {
     restartBtn[i].addEventListener('click', setUpGame);
 }
