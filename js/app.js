@@ -175,6 +175,8 @@ function hideTheWinningMessage() {
 function setUpGame() {
     board = prepareBoard();
     startTime = null;
+    //reset index
+    openCardIndex = -1;
     prepareHTML(board, deck);
     addEventListenerForCards();
     updateMoveCounter(true);
