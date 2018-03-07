@@ -5,7 +5,7 @@ The project has been created during the Udemy course -> Front-End Web Developer 
 ## Demo
 https://dominikaporzyczka.github.io/MemoryGame/
 
-## Technogies
+## Technologies
 
 * HTML5
 * CSS3
